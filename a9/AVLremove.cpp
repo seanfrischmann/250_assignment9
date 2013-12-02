@@ -1,7 +1,7 @@
 // =============================================================================
 // AVLTree.cpp
 // ~~~~~~~~~~~
-// YOUR NAME
+// Sean Frischmann
 // implement the remove function of the AVL tree
 // =============================================================================
 
@@ -12,8 +12,8 @@
 using namespace std; // BAD PRACTICE
 
 const string usage_msg = "AVL Tree Driver. Version 0.2\n"
-                         "Author: Your Name\n"                       
-                         "Report bugs to yourid@buffalo.edu";
+                         "Author: Sean Frischmann\n"                       
+                         "Report bugs to seanfris@buffalo.edu";
 
 /**
  * -----------------------------------------------------------------------------
