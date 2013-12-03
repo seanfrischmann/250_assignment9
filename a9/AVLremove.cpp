@@ -78,5 +78,6 @@ bool AVLTree<Key>::remove(Key key) {
 	if(node == NULL){
 		return false;
 	}else{
+		AVLNode
 	}
 }
