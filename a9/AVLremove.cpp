@@ -14,7 +14,40 @@ using namespace std; // BAD PRACTICE
 const string usage_msg = "AVL Tree Driver. Version 0.2\n"
                          "Author: Your Name\n"                       
                          "Report bugs to yourid@buffalo.edu";
-
+/**
+ * -----------------------------------------------------------------------------
+ * Maximum Method~
+ *  Purpose is to find the right-most node of a binary search tree
+ * -----------------------------------------------------------------------------
+ **/
+template <typename Key>
+typename AVLTree<Key>::AVLNode* 
+AVLTree<Key::maximum(typename AVLTree<Key>::AVLNode* root){
+	if(root == NULL){return NULL;}
+	while(root->right != NULL){
+		root = root->right;
+	}
+	return root;
+}
+/**
+ * -----------------------------------------------------------------------------
+ * Predecessor Method~
+ *  Purpose is to find the right-most node on the left branch, otherwise the
+ *  first ancestor whose right child is an ancestor
+ * -----------------------------------------------------------------------------
+ **/
+template <typename Key>
+typename AVLTree<Key>::AVLNode* 
+AVLTree<Key::predecessor(typename AVLTree<Key>::AVLNode* node){
+	if(node == NULL){return NULL;}
+	if(node->left != NULL){return maximum(node->left);}
+	AVLNode* par = node->parent;
+	while((par != NULL) && (par->left == node)){
+		node = par;
+		par = par->parent;
+	}
+	return par;
+}
 /**
  * -----------------------------------------------------------------------------
  * Assignment 9: 
