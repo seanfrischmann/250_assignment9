@@ -22,7 +22,7 @@ const string usage_msg = "AVL Tree Driver. Version 0.2\n"
  **/
 template <typename Key>
 typename AVLTree<Key>::AVLNode* 
-AVLTree<Key::maximum(typename AVLTree<Key>::AVLNode* root){
+maximum(typename AVLTree<Key>::AVLNode* root){
 	if(root == NULL){return NULL;}
 	while(root->right != NULL){
 		root = root->right;
@@ -38,10 +38,10 @@ AVLTree<Key::maximum(typename AVLTree<Key>::AVLNode* root){
  **/
 template <typename Key>
 typename AVLTree<Key>::AVLNode* 
-AVLTree<Key::predecessor(typename AVLTree<Key>::AVLNode* node){
+predecessor(typename AVLTree<Key>::AVLNode* node){
 	if(node == NULL){return NULL;}
 	if(node->left != NULL){return maximum(node->left);}
-	AVLNode* par = node->parent;
+	typename AVLTree<Key>::AVLNode* par = node->parent;
 	while((par != NULL) && (par->left == node)){
 		node = par;
 		par = par->parent;
@@ -74,10 +74,36 @@ AVLTree<Key::predecessor(typename AVLTree<Key>::AVLNode* node){
  */
 template <typename Key>
 bool AVLTree<Key>::remove(Key key) {
-	AVLNode* node = search(root_, key);
-	if(node == NULL){
+	AVLNode* node_value = search(root_, key);
+	if(node_value == NULL){
 		return false;
 	}else{
-		AVLNode
+		AVLNode* node_to_delete;
+		if((node_value->left == NULL) || (node_value->right == NULL)){
+				node_to_delete = node_value;
+		}else{
+			node_to_delete = predecessor(node_value);
+		}
+		AVLNode* node_child;
+		if(node_to_delete->left == NULL){
+			node_child = node_to_delete->right;
+		}else{
+			node_child = node_to_delete->left;
+		}
+		AVLNode* node_par = node_to_delete->parent;
+		if(node_par == NULL){
+			root_ = NULL;
+		}else{
+			if(node_par->left == node_to_delete){
+				node_par->left = node_child;
+			}else{
+				node_par->right = node_child;
+			}
+		}
+		if(node_value != node_to_delete){
+			node_value->key = node_to_delete->key;
+		}
+		delete node_to_delete;
+		return true;
 	}
 }
